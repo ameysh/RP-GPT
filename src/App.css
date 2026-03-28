@@ -467,62 +467,95 @@ body {
     width: 100%;
 }
 
-.settings-ollama {
-    display: flex;
-    gap: 18px;
-    justify-content: center;
-    align-self: center;
-    width: 50%;
+.settings-modal {
+    gap: 20px;
 }
 
-.settings-group {
+.settings-section {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
     border: 1px solid var(--primary-accent-color);
     border-radius: 12px;
     background-color: var(--hover-background-color);
-    padding: 18px;
+    padding: 20px;
 }
 
 .settings-group-title {
     color: var(--text-color);
     font-size: 24px;
     margin: 0;
-    text-align: center;
+    text-align: left;
 }
 
-.settings-ollama span {
-    font-size: 21px;
-    text-align: end;
-    flex: 1;
+.settings-field-row {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
 }
 
-.settings-ollama select {
-    flex: 1;
-    color: var(--white);
-    background-color: var(--hover-background-color);
-    font-family: "Grenze";
-    font-size: 15px;
+.settings-field-row-compact {
+    grid-template-columns: 180px minmax(0, 1fr);
 }
 
-.settings-ollama input {
-    flex: 1;
-    font-size: 15px;
-    padding: 6px;
-    border-radius: 4px;
+.settings-field-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-label {
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.settings-control {
+    width: 100%;
+    font-size: 17px;
+    padding: 8px 10px;
+    border-radius: 6px;
     border: 1px solid var(--primary-accent-color);
     background-color: var(--hover-background-color);
     color: var(--text-color);
+    font-family: "Grenze";
+    box-sizing: border-box;
+}
+
+.settings-control:focus {
+    outline: 2px solid var(--secondary-accent-color);
+    outline-offset: 1px;
+}
+
+.settings-control-with-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.settings-control-with-action .settings-control {
+    flex: 1;
+}
+
+.settings-control-with-action .settings-control-number {
+    width: 96px;
+    min-width: 96px;
+    flex: 0 0 96px;
+}
+
+.settings-advanced-grid {
+    display: grid;
+    gap: 10px;
 }
 
 .settings-reset-option-button {
     border: 1px solid var(--primary-accent-color);
     background-color: transparent;
     color: var(--text-color);
-    border-radius: 4px;
-    min-width: 34px;
-    height: 34px;
+    border-radius: 6px;
+    min-width: 36px;
+    height: 36px;
     cursor: pointer;
     font-size: 18px;
     line-height: 1;
@@ -530,6 +563,11 @@ body {
 
 .settings-reset-option-button:hover {
     background-color: var(--background-color);
+}
+
+.settings-reset-option-button:focus {
+    outline: 2px solid var(--secondary-accent-color);
+    outline-offset: 1px;
 }
 
 .summary-label span {
@@ -553,22 +591,23 @@ body {
 }
 
 .settings-system-instructions {
-    width: 80%;
-    min-height: 210px;
-    align-self: center;
-    font-size: 21px;
+    width: 100%;
+    min-height: 180px;
+    font-size: 18px;
     line-height: var(--line-height);
     font-family: 'Grenze';
     background: transparent;
     color: var(--text-color);
-    padding: 6px 6px;
+    padding: 10px 12px;
     resize: none;
-    border: none;
-    outline: 1px solid var(--primary-accent-color);
+    box-sizing: border-box;
+    border: 1px solid var(--primary-accent-color);
+    border-radius: 6px;
 }
 
 .settings-system-instructions:focus {
-    outline: 1px solid var(--primary-accent-color);
+    outline: 2px solid var(--secondary-accent-color);
+    outline-offset: 1px;
 }
 
 .settings-system-instructions:disabled {
@@ -589,6 +628,31 @@ body {
 
 .settings-save-button:hover {
     opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+    .settings-field-row,
+    .settings-field-row-compact {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .settings-label {
+        text-align: left;
+        font-size: 18px;
+    }
+
+    .settings-section {
+        padding: 14px;
+    }
+
+    .settings-group-title {
+        font-size: 22px;
+    }
+
+    .settings-system-instructions {
+        min-height: 150px;
+    }
 }
 
 .loading-indicator {
