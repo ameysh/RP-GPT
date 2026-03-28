@@ -464,6 +464,23 @@ body {
     width: 50%;
 }
 
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border: 1px solid var(--primary-accent-color);
+    border-radius: 12px;
+    background-color: var(--hover-background-color);
+    padding: 18px;
+}
+
+.settings-group-title {
+    color: var(--text-color);
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
 .settings-ollama span {
     font-size: 21px;
     text-align: end;
