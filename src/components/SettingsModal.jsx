@@ -2,6 +2,18 @@ import { IconButton } from './IconButton';
 import { IconButtonEnum } from '../utils/enums';
 import { useState } from 'react';
 
+// Baseline values used by each advanced-parameter reset button.
+// These may be exported for use in other components, such as a "Reset All to Default" button in the future.
+const DEFAULT_OPTIONS = {
+  temperature: 0.82,
+  top_p: 0.92,
+  num_predict: 512,
+  repeat_penalty: 1.12,
+  num_ctx: 12288,
+  top_k: 39,
+  repeat_last_n: 8192,
+};
+
 export default function SettingsModal({ settings, saveSettings, ollamaModels, closeModal}) {
   const [ollamaModel, setOllamaModel] = useState(settings.ollamaModel);
   const [summaryModel, setSummaryModel] = useState(settings.summaryModel);
@@ -16,6 +28,10 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
       return;
     }
     setOptions({ ...options, [key]: parsedValue });
+  };
+
+  const resetOptionToDefault = (key) => {
+    setOptions({ ...options, [key]: DEFAULT_OPTIONS[key] });
   };
 
   const handleSave = async () => {
@@ -84,6 +100,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
               value={options.temperature}
                 onChange={(e) => updateNumericOption('temperature', e.target.value, true)}
             />
+              <button className='settings-reset-option-button' onClick={() => resetOptionToDefault('temperature')} title='Reset to default value'>{'\u21BA'}</button>
           </div>
           <div className='settings-ollama'>
             <span>top-p: </span>
@@ -92,6 +109,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
               value={options.top_p}
                 onChange={(e) => updateNumericOption('top_p', e.target.value, true)}
             />
+              <button className='settings-reset-option-button' onClick={() => resetOptionToDefault('top_p')} title='Reset to default value'>{'\u21BA'}</button>
           </div>
           <div className='settings-ollama'>
             <span>top-k: </span>
@@ -100,6 +118,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
               value={options.top_k}
                 onChange={(e) => updateNumericOption('top_k', e.target.value)}
             />
+              <button className='settings-reset-option-button' onClick={() => resetOptionToDefault('top_k')} title='Reset to default value'>{'\u21BA'}</button>
           </div>
           <div className='settings-ollama'>
             <span>num_predict: </span>
@@ -108,6 +127,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
               value={options.num_predict}
                 onChange={(e) => updateNumericOption('num_predict', e.target.value)}
             />
+              <button className='settings-reset-option-button' onClick={() => resetOptionToDefault('num_predict')} title='Reset to default value'>{'\u21BA'}</button>
           </div>
           <div className='settings-ollama'>
             <span>repeat_penalty: </span>
@@ -116,6 +136,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
               value={options.repeat_penalty}
                 onChange={(e) => updateNumericOption('repeat_penalty', e.target.value, true)}
             />
+              <button className='settings-reset-option-button' onClick={() => resetOptionToDefault('repeat_penalty')} title='Reset to default value'>{'\u21BA'}</button>
           </div>
           <div className='settings-ollama'>
             <span>repeat_last_n: </span>
@@ -124,6 +145,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
               value={options.repeat_last_n}
                 onChange={(e) => updateNumericOption('repeat_last_n', e.target.value)}
             />
+              <button className='settings-reset-option-button' onClick={() => resetOptionToDefault('repeat_last_n')} title='Reset to default value'>{'\u21BA'}</button>
           </div>
           <div className='settings-ollama'>
             <span>num_ctx: </span>
@@ -132,6 +154,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
               value={options.num_ctx}
                 onChange={(e) => updateNumericOption('num_ctx', e.target.value)}
             />
+              <button className='settings-reset-option-button' onClick={() => resetOptionToDefault('num_ctx')} title='Reset to default value'>{'\u21BA'}</button>
           </div>
         </div>
       </div>

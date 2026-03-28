@@ -516,6 +516,22 @@ body {
     color: var(--text-color);
 }
 
+.settings-reset-option-button {
+    border: 1px solid var(--primary-accent-color);
+    background-color: transparent;
+    color: var(--text-color);
+    border-radius: 4px;
+    min-width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.settings-reset-option-button:hover {
+    background-color: var(--background-color);
+}
+
 .summary-label span {
     font-size: 21px;
     margin-right: 18px;
