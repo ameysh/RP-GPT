@@ -19,7 +19,10 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
       <div className="large-modal">
         <div className="close-large-modal">
           <span>Settings</span>
-          <IconButton icon={IconButtonEnum.CLOSE} onClick={closeModal} />
+          <div className='close-large-modal-actions'>
+            <button className='settings-save-button' onClick={handleSave}>Save</button>
+            <IconButton icon={IconButtonEnum.CLOSE} onClick={closeModal} />
+          </div>
         </div>
         <div className='settings-group'>
           <h3 className='settings-group-title'>System Prompts</h3>
@@ -131,7 +134,6 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             />
           </div>
         </div>
-        <button className='settings-save-button' onClick={handleSave}>Save</button>
       </div>
     </div>
   );

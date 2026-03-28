@@ -277,14 +277,25 @@ body {
 
 .close-large-modal {
     display: flex;
-    justify-content: end
+    justify-content: end;
+    align-items: center;
+    position: relative;
+    min-height: 42px;
 }
 
 .close-large-modal span {
-    margin-right: auto;
-    margin-left: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
     color: var(--text-color);
     font-size: 33px;
+}
+
+.close-large-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .large-modal input {
@@ -557,8 +568,7 @@ body {
   color: var(--text-color);
   font-size: 15px;
   font-family: "Grenze";
-  width: 5%;
-  align-self: center;
+    width: auto;
 }
 
 .settings-save-button:hover {
