@@ -152,7 +152,7 @@ export default function GameMaster() {
         />
       }
       {
-        isLargeModalOpen && largeModalTypeEnum === LargeModalTypeEnum.SETTINGS &&
+        isLargeModalOpen && largeModalTypeEnum === LargeModalTypeEnum.SETTINGS && settings &&
         <SettingsModal
           settings={settings}
           saveSettings={saveSettings}

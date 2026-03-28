@@ -24,9 +24,15 @@ export function useSettings(availableModels = []) {
       });
   }, [availableModels]);
 
-  const saveSettings = (newSettings) => {
+  const saveSettings = async (newSettings) => {
+    const previousSettings = settings;
     setSettings(newSettings);
-    api.post(ApiPaths.Api_Settings, newSettings);
+    try {
+      await api.post(ApiPaths.Api_Settings, newSettings);
+    } catch (error) {
+      setSettings(previousSettings);
+      throw error;
+    }
   };
 
   return { settings, saveSettings };

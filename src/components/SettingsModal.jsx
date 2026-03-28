@@ -8,10 +8,24 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
   const [systemInstructions, setSystemInstructions] = useState(settings.systemInstructions);
   const [summaryInstructions, setSummaryInstructions] = useState(settings.summaryInstructions);
   const [options, setOptions] = useState(settings.options);
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handleSave = () => {
-    saveSettings({ ollamaModel, summaryModel, systemInstructions, summaryInstructions, options });
-    closeModal();
+  const updateNumericOption = (key, rawValue, isFloat = false) => {
+    const parsedValue = isFloat ? parseFloat(rawValue) : parseInt(rawValue, 10);
+    if (!Number.isFinite(parsedValue)) {
+      return;
+    }
+    setOptions({ ...options, [key]: parsedValue });
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      await saveSettings({ ollamaModel, summaryModel, systemInstructions, summaryInstructions, options });
+      closeModal();
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -20,7 +34,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
         <div className="close-large-modal">
           <span>Settings</span>
           <div className='close-large-modal-actions'>
-            <button className='settings-save-button' onClick={handleSave}>Save</button>
+            <button className='settings-save-button' onClick={handleSave} disabled={isSaving}>{isSaving ? 'Saving...' : 'Save'}</button>
             <IconButton icon={IconButtonEnum.CLOSE} onClick={closeModal} />
           </div>
         </div>
@@ -68,9 +82,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             <input
               type="number"
               value={options.temperature}
-              onChange={(e) => setOptions(
-                { ...options, temperature: parseFloat(e.target.value) }
-              )}
+                onChange={(e) => updateNumericOption('temperature', e.target.value, true)}
             />
           </div>
           <div className='settings-ollama'>
@@ -78,9 +90,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             <input
               type="number"
               value={options.top_p}
-              onChange={(e) => setOptions(
-                { ...options, top_p: parseFloat(e.target.value) }
-              )}
+                onChange={(e) => updateNumericOption('top_p', e.target.value, true)}
             />
           </div>
           <div className='settings-ollama'>
@@ -88,9 +98,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             <input
               type="number"
               value={options.top_k}
-              onChange={(e) => setOptions(
-                { ...options, top_k: parseInt(e.target.value) }
-              )}
+                onChange={(e) => updateNumericOption('top_k', e.target.value)}
             />
           </div>
           <div className='settings-ollama'>
@@ -98,9 +106,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             <input
               type="number"
               value={options.num_predict}
-              onChange={(e) => setOptions(
-                { ...options, num_predict: parseInt(e.target.value) }
-              )}
+                onChange={(e) => updateNumericOption('num_predict', e.target.value)}
             />
           </div>
           <div className='settings-ollama'>
@@ -108,9 +114,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             <input
               type="number"
               value={options.repeat_penalty}
-              onChange={(e) => setOptions(
-                { ...options, repeat_penalty: parseFloat(e.target.value) }
-              )}
+                onChange={(e) => updateNumericOption('repeat_penalty', e.target.value, true)}
             />
           </div>
           <div className='settings-ollama'>
@@ -118,9 +122,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             <input
               type="number"
               value={options.repeat_last_n}
-              onChange={(e) => setOptions(
-                { ...options, repeat_last_n: parseInt(e.target.value) }
-              )}
+                onChange={(e) => updateNumericOption('repeat_last_n', e.target.value)}
             />
           </div>
           <div className='settings-ollama'>
@@ -128,9 +130,7 @@ export default function SettingsModal({ settings, saveSettings, ollamaModels, cl
             <input
               type="number"
               value={options.num_ctx}
-              onChange={(e) => setOptions(
-                { ...options, num_ctx: parseInt(e.target.value) }
-              )}
+                onChange={(e) => updateNumericOption('num_ctx', e.target.value)}
             />
           </div>
         </div>

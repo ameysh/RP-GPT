@@ -1,5 +1,6 @@
 import { readFile, writeFile } from '../utils/fileHelpers.js';
 import { FilePaths, ApiPaths } from '../utils/constants.js';
+import { validSettings } from '../utils/validator.js';
 
 export default function register(app) {
   app.get(ApiPaths.Api_Settings, async (req, res) => {
@@ -20,6 +21,13 @@ export default function register(app) {
   });
 
   app.post(ApiPaths.Api_Settings, async (req, res) => {
+    if (!validSettings(req.body)) {
+      return res.status(400).json({
+        ok: false,
+        message: 'Invalid settings payload',
+      });
+    }
+
     try {
       await writeFile(FilePaths.FilePath_OllamaSettings, req.body);
       res.json({ ok: true, message: 'Settings saved successfully' });
