@@ -469,6 +469,7 @@ body {
 
 .settings-modal {
     gap: 20px;
+    width: min(72vw, 980px);
 }
 
 .settings-section {
@@ -631,6 +632,10 @@ body {
 }
 
 @media (max-width: 900px) {
+    .settings-modal {
+        width: 92vw;
+    }
+
     .settings-field-row,
     .settings-field-row-compact {
         grid-template-columns: 1fr;
